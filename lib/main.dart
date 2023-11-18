@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
         home: Scaffold(
       body: Center(
-        child: Text('Hello World'),
+        child: Text('Hello World and changed from weather to todo app'),
       ),
     ));
   }
