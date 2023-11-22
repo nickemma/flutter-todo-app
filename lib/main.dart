@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/first_route.dart';
-import 'package:weather_app/pages/home_page.dart';
-import 'package:weather_app/pages/settings_page.dart';
+import 'pages/home_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,12 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const FirstRoute(),
-      routes: {
-        '/firstpage': (context) => const FirstRoute(),
-        '/homepage': (context) => const HomePage(),
-        '/settings': (context) => const SettingsPage(),
-      },
+      home: const HomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.yellow,
+      ),
     );
   }
 }
