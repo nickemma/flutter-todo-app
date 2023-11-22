@@ -1,48 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/pages/home_page.dart';
+import 'package:weather_app/pages/profile_page.dart';
+import 'package:weather_app/pages/settings_page.dart';
 
-class FirstRoute extends StatelessWidget {
+class FirstRoute extends StatefulWidget {
   const FirstRoute({super.key});
+
+  @override
+  State<FirstRoute> createState() => _FirstRouteState();
+}
+
+class _FirstRouteState extends State<FirstRoute> {
+// to track the current index of the page
+  int _currentIndex = 0;
+
+// needs a method to change the current index
+
+  void _navigateBottomBar(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+// this is the list of pages to display
+  final List _pages = [
+    const HomePage(),
+    const ProfilePage(),
+    const SettingsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('First Route'),
+        title: const Center(child: Text('First Route')),
       ),
-      drawer: Drawer(
-        backgroundColor: Colors.deepPurple[200],
-        child: Column(
-          children: [
-            const DrawerHeader(
-                child: Icon(
-              Icons.favorite,
-              size: 48,
-            )),
-
-            // home page link
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('H O M E'),
-              onTap: () {
-                // clear it back before pushing
-                Navigator.pop(context);
-
-                // push it now
-                Navigator.pushNamed(context, '/homepage');
-              },
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: _navigateBottomBar,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
-            // settings page link
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('S E T T I N G S'),
-              onTap: () {
-                // push it now
-                Navigator.pushNamed(context, '/settings');
-              },
-            )
-          ],
-        ),
-      ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ]),
     );
   }
 }
